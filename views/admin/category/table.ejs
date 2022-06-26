@@ -1,0 +1,33 @@
+<table id="example2" class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let index = 0; index < data.length; index++) { %>
+      <tr>
+        <td>
+          <%= index + 1 %>
+        </td>
+        <td>
+          <%= data[index].name %>
+        </td>
+        <td>
+          <form action="/category/delete/<%= data[index]._id %>?_method=DELETE" method="post">
+            <a href="/category/update/<%= data[index]._id %>" class="btn btn-info">
+              <i class="fas fa-pencil-alt"></i>
+              Update
+            </a>
+            <button class="btn btn-danger" type="submit">
+              <i class="fas fa-trash"></i>
+              Delete
+            </button>
+          </form>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>

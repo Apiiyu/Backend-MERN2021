@@ -1,0 +1,67 @@
+<table id="example2" class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Game Name</th>
+      <th>Game Category</th>
+      <th>Nominal</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let index = 0; index < data.length; index++) { %>
+      <tr>
+        <td>
+          <%= index + 1 %>
+        </td>
+        <td>
+          <%= data[index].name %>
+        </td>
+        <td>
+          <%= data[index]?.category?.name ?? '-' %>
+        </td>
+        <td>
+          <% data[index].nominals.forEach(item => { %>
+            <span class="badge badge-info px-2 py-2">
+              <%= item.coinName %> <%= item.coinQuantity %>
+            </span>
+          <% }) %>
+        </td>
+        <td>
+          <% if(data[index].status === 'Active') { %>
+            <span class="badge badge-success px-2 py-2">
+              <%= data[index].status %> 
+            </span>
+          <% } else { %>
+            <span class="badge badge-danger px-2 py-2">
+              <%= data[index].status %> 
+            </span>
+          <% } %>
+        </td>
+        <td class="d-flex">
+          <form action="/vouchers/status/<%= data[index]._id %>?_method=PUT" method="post">
+            <button class="btn btn-primary btn-sm" type="submit">
+              <i class="fas fa-folder"></i>
+              <% if(data[index].status === 'Active') { %>
+                Non Active
+              <% } else { %>
+                Activated
+              <% } %>
+            </button>
+          </form>
+          <form action="/vouchers/delete/<%= data[index]._id %>?_method=DELETE" method="post">
+            <a href="/vouchers/update/<%= data[index]._id %>" class="btn btn-info btn-sm mx-3">
+              <i class="fas fa-pencil-alt"></i>
+              Update
+            </a>
+            <button class="btn btn-danger btn-sm" type="submit">
+              <i class="fas fa-trash"></i>
+              Delete
+            </button>
+          </form>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
