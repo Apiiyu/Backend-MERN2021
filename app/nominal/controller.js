@@ -15,7 +15,9 @@ module.exports = {
       console.log(alert)
       response.render('admin/nominal/v_nominal', {
         data,
-        alert
+        alert,
+        name: request.session.user.name,
+        title: 'Nominal - PVPStore'
       })
 
     } catch (error) {
@@ -31,7 +33,10 @@ module.exports = {
   */
   viewCreate: async(request, response) => {
     try {
-      response.render('admin/nominal/create')
+      response.render('admin/nominal/create', {
+        name: request.session.user.name,
+        title: 'Update Nominal - PVPStore'
+      })
     } catch(error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
@@ -71,7 +76,9 @@ module.exports = {
       const data = await Nominal.findById(id)
       
       response.render('admin/nominal/update', {
-        data
+        data,
+        name: request.session.user.name,
+        title: 'Update Nominal - PVPStore'
       })
     } catch(error) {
       request.flash('message', `${error.message}`)

@@ -1,0 +1,110 @@
+<%- include ../../partials/header.ejs %>
+<%- include ../../partials/navbar.ejs %>
+<%- include ../../partials/sidebar.ejs %>
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Nominal</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="/bank">Bank</a></li>
+              <li class="breadcrumb-item active">Update Data</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-primary">
+              <!-- /.card-header -->
+              <div class="card-header">
+                <div class="card-title">Form Update Bank</div>
+              </div>
+              <form action="/bank/update/<%= data._id %>?_method=PUT" method="post">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" value="<%= data.name %>" class="form-control" id="name" placeholder="Insert Your Name" required autocomplete="on">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="bankName">Bank Name</label>
+                      <select class="form-control select2" name="bankName" required style="width: 100%;">
+                        <option>Choose Bank</option>
+                        <option 
+                          value="Bank Rakyat Indonesia"
+                          <% if (data.bankName == 'Bank Rakyat Indonesia') { %> selected <% } %>
+                        >Bank Rakyat Indonesia
+                        </option>
+                        <option 
+                          value="Bank Nasional Indonesia"
+                          <% if (data.bankName == 'Bank Nasional Indonesia') { %> selected <% } %>
+                        >
+                          Bank Nasional Indonesia
+                        </option>
+                        <option 
+                          value="Bank Syariah Indonesia"
+                          <% if (data.bankName == 'Bank Syariah Indonesia') { %> selected <% } %>  
+                        >
+                          Bank Syariah Indonesia
+                        </option>
+                        <option 
+                          value="Bank Central Asia"
+                          <% if (data.bankName == 'Bank Central Asia') { %> selected <% } %>
+                        >
+                          Bank Central Asia
+                        </option>
+                        <option 
+                          value="Bank Mandiri"
+                          <% if (data.bankName == 'Bank Mandiri') { %> selected <% } %>
+                        >
+                          Bank Mandiri
+                        </option>
+                        <option 
+                          value="Bank Jago"
+                          <% if (data.bankName == 'Bank Jago') { %> selected <% } %>
+                        >
+                          Bank Jago
+                        </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="accountNumber">Account Number</label>
+                    <input type="number" name="accountNumber" value="<%= data.accountNumber %>" class="form-control" id="accountNumber" placeholder="Insert Your Account Number" required autocomplete="on">
+                  </div>
+                </div>
+  
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </form>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+<%- include ../../partials/footer.ejs %>
+<%- include ../../partials/js.ejs %>

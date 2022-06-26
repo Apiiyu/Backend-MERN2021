@@ -2,9 +2,9 @@
   <thead>
     <tr>
       <th>No</th>
-      <th>Coin Name</th>
-      <th>Coin Quantity</th>
-      <th>Price</th>
+      <th>Name</th>
+      <th>Bank Name</th>
+      <th>Account Number</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -15,17 +15,17 @@
           <%= index + 1 %>
         </td>
         <td>
-          <%= data[index].coinName %>
+          <%= data[index].name %>
         </td>
         <td>
-          <%= data[index].coinQuantity %>
+          <%= data[index].bankName %>
         </td>
         <td>
-          <%= data[index].price %>
+          <%= data[index].accountNumber %>
         </td>
         <td>
-          <form action="/nominal/delete/<%= data[index]._id %>?_method=DELETE" method="post">
-            <a href="/nominal/update/<%= data[index]._id %>" class="btn btn-info btn-sm">
+          <form action="/bank/delete/<%= data[index]._id %>?_method=DELETE" method="post">
+            <a href="/bank/update/<%= data[index]._id %>" class="btn btn-info btn-sm">
               <i class="fas fa-pencil-alt"></i>
               Update
             </a>

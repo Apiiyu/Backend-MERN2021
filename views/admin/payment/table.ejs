@@ -2,9 +2,8 @@
   <thead>
     <tr>
       <th>No</th>
-      <th>Game Name</th>
-      <th>Game Category</th>
-      <th>Nominal</th>
+      <th>Type of Payment</th>
+      <th>Banks</th>
       <th>Status</th>
       <th>Actions</th>
     </tr>
@@ -16,15 +15,12 @@
           <%= index + 1 %>
         </td>
         <td>
-          <%= data[index].name %>
+          <%= data[index].type %>
         </td>
         <td>
-          <%= data[index]?.category?.name ?? '-' %>
-        </td>
-        <td>
-          <% data[index].nominals.forEach(item => { %>
-            <span class="badge badge-info px-2 py-2 my-1">
-              <%= item.coinName %> <%= item.coinQuantity %>
+          <% data[index].banks.forEach(item => { %>
+            <span class="badge badge-info px-2 py-2">
+              <%= item.name %> - <%= item.bankName %> - <%= item.accountNumber %>
             </span>
           <% }) %>
         </td>
@@ -40,7 +36,7 @@
           <% } %>
         </td>
         <td class="d-flex">
-          <form action="/vouchers/status/<%= data[index]._id %>?_method=PUT" method="post">
+          <form action="/payment/status/<%= data[index]._id %>?_method=PUT" method="post">
             <button class="btn btn-primary btn-sm" type="submit">
               <i class="fas fa-folder"></i>
               <% if(data[index].status === 'Active') { %>
@@ -50,8 +46,9 @@
               <% } %>
             </button>
           </form>
-          <form action="/vouchers/delete/<%= data[index]._id %>?_method=DELETE" method="post">
-            <a href="/vouchers/update/<%= data[index]._id %>" class="btn btn-info btn-sm mx-1">
+
+          <form action="/payment/delete/<%= data[index]._id %>?_method=DELETE" method="post">
+            <a href="/payment/update/<%= data[index]._id %>" class="btn btn-info btn-sm mx-1">
               <i class="fas fa-pencil-alt"></i>
               Update
             </a>

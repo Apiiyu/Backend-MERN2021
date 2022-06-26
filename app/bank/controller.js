@@ -1,8 +1,8 @@
-const Category = require('./model')
+const Bank = require('./model')
 
 module.exports = {
   /**
-   * @description Handle page category
+   * @description Handle page Bank
    * @return {view}
   */
   index: async(request, response) => {
@@ -11,19 +11,18 @@ module.exports = {
       const status = request.flash('status')
       const alert = { message, status }
 
-      const data = await Category.find()
-      console.log(alert)
-      response.render('admin/category/v_category', {
+      const data = await Bank.find()
+      response.render('admin/bank/v_bank', {
         data,
         alert,
         name: request.session.user.name,
-        title: 'Category - PVPStore'
+        title: 'Bank - PVPStore'
       })
 
     } catch (error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/bank')
     }
   },
 
@@ -33,14 +32,14 @@ module.exports = {
   */
   viewCreate: async(request, response) => {
     try {
-      response.render('admin/category/create', {
+      response.render('admin/bank/create', {
         name: request.session.user.name,
-        title: 'Create Category - PVPStore'
+        title: 'Create Bank - PVPStore'
       })
     } catch(error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/bank')
     }
   },
 
@@ -51,18 +50,18 @@ module.exports = {
   */
   createData: async(request, response) => {
     try {
-      const { name } = request.body
-      let data = await Category({ name })
+      console.log(request.body)
+      const { name, bankName, accountNumber } = request.body
+      let data = await Bank({ name, bankName, accountNumber })
       await data.save()
-      request.flash('message', 'Success add new category!')
+      request.flash('message', 'Success add new bank!')
       request.flash('status', 'success')
 
-      console.log()
-      response.redirect('/category')
+      response.redirect('/bank')
     } catch(error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/bank')
     }
   },
 
@@ -73,17 +72,17 @@ module.exports = {
   viewUpdate: async(request, response) => {
     try {
       const { id } = request.params
-      const data = await Category.findById(id)
+      const data = await Bank.findById(id)
       
-      response.render('admin/category/update', {
+      response.render('admin/bank/update', {
         data,
         name: request.session.user.name,
-        title: 'Update Category - PVPStore'
+        title: 'Update Bank - PVPStore'
       })
     } catch(error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/bank')
     }
   },
 
@@ -96,19 +95,19 @@ module.exports = {
   updateData: async(request, response) => {
     try {
       const { id } = request.params
-      const { name } = request.body 
-      const data = await Category.findOneAndUpdate({
+      const { name, bankName, accountNumber } = request.body 
+      const data = await Bank.findOneAndUpdate({
         _id: id,
-      }, { name})
+      }, { name, bankName, accountNumber })
 
-      request.flash('message', 'Success update data category!')
+      request.flash('message', 'Success update data bank!')
       request.flash('status', 'success')
 
-      response.redirect('/category')
+      response.redirect('/bank')
     } catch(error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/bank')
     }
   },
 
@@ -120,18 +119,18 @@ module.exports = {
   deleteData: async(request, response) => {
     try {
       const { id } = request.params
-      const data = await Category.findOneAndRemove({
+      const data = await Bank.findOneAndRemove({
         _id: id
       })
 
-      request.flash('message', 'Success delete data category!')
+      request.flash('message', 'Success delete data bank!')
       request.flash('status', 'success')
 
-      response.redirect('/category')
+      response.redirect('/bank')
     } catch(error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/bank')
     }
   }
 }

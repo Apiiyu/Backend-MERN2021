@@ -9,6 +9,10 @@ let schemaVoucher = mongoose.Schema({
     enum: ['Active', 'Inactive'],
     default: 'Active'
   },
+  isFeatured: {
+    type: Boolean,
+    default: false
+  },
   thumbnail: {
     type: String,
   },
@@ -24,6 +28,8 @@ let schemaVoucher = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+},{
+  timestamps: true
 })
 
 module.exports = mongoose.model('Vouchers', schemaVoucher)

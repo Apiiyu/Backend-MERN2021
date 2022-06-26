@@ -1,0 +1,83 @@
+<%- include ../../partials/header.ejs %>
+<%- include ../../partials/navbar.ejs %>
+<%- include ../../partials/sidebar.ejs %>
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Type of Payment</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="/payment">Type of Payment</a></li>
+              <li class="breadcrumb-item active">Update Data</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-primary">
+              <!-- /.card-header -->
+              <div class="card-header">
+                <div class="card-title">Form Update Type of Payment <%= data.type %></div> </div>
+              </div>
+              <form action="/payment/update/<%= data._id %>?_method=PUT" method="post">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="type">Type of Payment</label>
+                    <input type="text" name="type" value="<%= data.type %>" class="form-control" id="type" placeholder="Insert game name" required autocomplete="on">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Banks</label>
+                    <div class="select2-purple">
+                      <select class="form-control select2" data-placeholder="Choose Nominal" multiple="multiple" name="banks" required style="width: 100%;">
+                        <% BankItems.forEach(item => { %>
+                          <option 
+                            value="<%= item._id %>"
+                            <% data.banks.forEach(PaymentItems => { %>
+                              <% if(item._id.toString() === PaymentItems._id.toString()) { %>
+                                selected
+                              <% } %>
+                            <% }) %>
+                          >
+                            <%= item.name %> - <%= item.bankName %> - <%= item.accountNumber %>
+                          </option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </form>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+<%- include ../../partials/footer.ejs %>
+<%- include ../../partials/js.ejs %>

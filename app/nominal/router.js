@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 const { index, viewCreate, createData, viewUpdate, updateData, deleteData } = require('./controller')
+const { isLoginAdmin } = require('../middleware/auth')
 
-/* GET category page. */
+/* Router Nominal Page */
+router.use(isLoginAdmin)
+
 router.get('/', index)
 router.get('/create', viewCreate)
 router.post('/create', createData)

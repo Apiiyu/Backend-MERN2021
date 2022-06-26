@@ -1,8 +1,9 @@
-const Category = require('./model')
+const Payment = require('./model')
+const Bank = require('../bank/model')
 
 module.exports = {
   /**
-   * @description Handle page category
+   * @description Handle page Payment
    * @return {view}
   */
   index: async(request, response) => {
@@ -11,19 +12,18 @@ module.exports = {
       const status = request.flash('status')
       const alert = { message, status }
 
-      const data = await Category.find()
-      console.log(alert)
-      response.render('admin/category/v_category', {
+      const data = await Payment.find().populate('banks')
+      response.render('admin/payment/v_payment', {
         data,
         alert,
         name: request.session.user.name,
-        title: 'Category - PVPStore'
+        title: 'Payment - PVPStore'
       })
 
     } catch (error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/payment')
     }
   },
 
@@ -33,14 +33,16 @@ module.exports = {
   */
   viewCreate: async(request, response) => {
     try {
-      response.render('admin/category/create', {
+      const BankItems = await Bank.find()
+      response.render('admin/payment/create', {
+        BankItems,
         name: request.session.user.name,
-        title: 'Create Category - PVPStore'
+        title: 'Create Payment - PVPStore'
       })
     } catch(error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/payment')
     }
   },
 
@@ -51,18 +53,17 @@ module.exports = {
   */
   createData: async(request, response) => {
     try {
-      const { name } = request.body
-      let data = await Category({ name })
+      const { type, banks } = request.body
+      let data = await Payment({ type, banks })
       await data.save()
-      request.flash('message', 'Success add new category!')
+      request.flash('message', 'Success add new type of payment!')
       request.flash('status', 'success')
 
-      console.log()
-      response.redirect('/category')
+      response.redirect('/payment')
     } catch(error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/payment')
     }
   },
 
@@ -73,17 +74,19 @@ module.exports = {
   viewUpdate: async(request, response) => {
     try {
       const { id } = request.params
-      const data = await Category.findById(id)
+      const data = await Payment.findById(id).populate('banks')
+      const BankItems = await Bank.find()
       
-      response.render('admin/category/update', {
+      response.render('admin/payment/update', {
         data,
+        BankItems,
         name: request.session.user.name,
-        title: 'Update Category - PVPStore'
+        title: 'Update Payment - PVPStore'
       })
     } catch(error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/payment')
     }
   },
 
@@ -96,19 +99,19 @@ module.exports = {
   updateData: async(request, response) => {
     try {
       const { id } = request.params
-      const { name } = request.body 
-      const data = await Category.findOneAndUpdate({
+      const { type, banks } = request.body 
+      const data = await Payment.findOneAndUpdate({
         _id: id,
-      }, { name})
+      }, { type, banks })
 
-      request.flash('message', 'Success update data category!')
+      request.flash('message', 'Success update data type of payment!')
       request.flash('status', 'success')
 
-      response.redirect('/category')
+      response.redirect('/payment')
     } catch(error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/payment')
     }
   },
 
@@ -120,18 +123,18 @@ module.exports = {
   deleteData: async(request, response) => {
     try {
       const { id } = request.params
-      const data = await Category.findOneAndRemove({
+      const data = await Payment.findOneAndRemove({
         _id: id
       })
 
-      request.flash('message', 'Success delete data category!')
+      request.flash('message', 'Success delete data type of payment!')
       request.flash('status', 'success')
 
-      response.redirect('/category')
+      response.redirect('/payment')
     } catch(error) {
       request.flash('message', `${error.message}`)
       request.flash('status', 'danger')
-      response.redirect('/category')
+      response.redirect('/payment')
     }
   }
 }

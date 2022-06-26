@@ -3,8 +3,8 @@ var router = express.Router();
 const { index, viewCreate, createData, viewUpdate, updateData, deleteData } = require('./controller')
 const { isLoginAdmin } = require('../middleware/auth')
 
-/* Router Category Page */
-router.use(isLoginAdmin)
+/* Router Bank Page */
+router.use(isLoginAdmin) 
 
 router.get('/', index)
 router.get('/create', viewCreate)

@@ -1,0 +1,72 @@
+<table id="example2" class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Game Name</th>
+      <th>Item</th>
+      <th>Price Total</th>
+      <th>Player Name</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let index = 0; index < data.length; index++) { %>
+      <tr>
+        <td>
+          <%= index + 1 %>
+        </td>
+        <td>
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <img width="48px" height="48px" src="http://localhost:3000/uploads/<%= data[index].historyVoucherTopUp.thumbnail %>" alt="thumbnail">
+            </li>
+          </ul>
+          <%= data[index]?.historyVoucherTopUp?.gameName %>
+          <br>
+          <%= data[index]?.historyVoucherTopUp?.category %>
+        </td>
+        <td>
+          <%= data[index].historyVoucherTopUp.coinQuantity %>
+          <%= data[index].historyVoucherTopUp.coinName %>
+        </td>
+        <td>
+          <%= data[index]?.value %>
+        </td>
+        <td>
+          <%= data[index]?.player.name?? '-' %>
+        </td>
+        <td>
+          <% if(data[index].status === 'Success') { %>
+            <span class="badge badge-success px-2 py-2">
+              <%= data[index].status %> 
+            </span>
+          <% } else if(data[index].status === 'Pending') { %>
+            <span class="badge badge-warning px-2 py-2">
+              <%= data[index].status %> 
+            </span>
+          <% } else { %>
+            <span class="badge badge-danger px-2 py-2">
+              <%= data[index].status %> 
+            </span>
+          <% } %>
+        </td>
+        <td class="d-flex">
+          <form action="/transactions/status/<%= data[index]._id %>?status=Failed&_method=PUT" method="post">
+            <button class="btn btn-danger btn-sm mr-1" type="submit">
+              <i class="fas fa-trash"></i>
+              Rejected
+            </button>
+          </form>
+
+          <form action="/transactions/status/<%= data[index]._id %>?status=Success&_method=PUT" method="post">
+            <button class="btn btn-info btn-sm" type="submit">
+              <i class="fas fa-check"></i>
+              Accepted
+            </button>
+          </form>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>

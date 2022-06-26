@@ -20,7 +20,9 @@ module.exports = {
       const data = await Vouchers.find().populate('category').populate('nominals')
       response.render('admin/vouchers/v_voucher', {
         data,
-        alert
+        alert,
+        name: request.session.user.name,
+        title: 'Vouchers - PVPStore'
       })
 
     } catch (error) {
@@ -40,7 +42,9 @@ module.exports = {
       const NominalItems = await Nominal.find()
       response.render('admin/vouchers/create', {
         CategoryItems,
-        NominalItems
+        NominalItems,
+        name: request.session.user.name,
+        title: 'Create Vouchers - PVPStore'
       })
     } catch(error) {
       request.flash('message', `${error.message}`)
@@ -124,7 +128,9 @@ module.exports = {
       response.render('admin/vouchers/update', {
         CategoryItem,
         NominalItem,
-        VouchersItem
+        VouchersItem,
+        name: request.session.user.name,
+        title: 'Update Vouchers - PVPStore'
       })
     } catch(error) {
       request.flash('message', `${error.message}`)

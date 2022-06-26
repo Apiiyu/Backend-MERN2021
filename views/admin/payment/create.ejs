@@ -1,0 +1,72 @@
+<%- include ../../partials/header.ejs %>
+<%- include ../../partials/navbar.ejs %>
+<%- include ../../partials/sidebar.ejs %>
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Type of Payment</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="/payment">Type of Payment</a></li>
+              <li class="breadcrumb-item active">Create Data</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-primary">
+              <!-- /.card-header -->
+              <div class="card-header">
+                <div class="card-title">Form Create Type of Payment</div>
+              </div>
+              <form action="/payment/create" method="post">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="type">Type</label>
+                    <input type="text" name="type" class="form-control" id="type" placeholder="Insert type of payment" required autocomplete="on">
+                  </div>
+
+                  <div class="select2-purple">
+                    <label for="type">Bank</label>
+                    <select class="form-control select2" data-placeholder="Choose Bank" multiple="multiple" name="banks" required style="width: 100%;">
+                      <% BankItems.forEach(item => { %>
+                        <option value="<%= item._id %>"><%= item.name %> <%= item.bankName %>-<%= item.accountNumber %></option>
+                      <% }) %>
+                    </select>
+                  </div>
+                </div>
+  
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </form>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+<%- include ../../partials/footer.ejs %>
+<%- include ../../partials/js.ejs %>

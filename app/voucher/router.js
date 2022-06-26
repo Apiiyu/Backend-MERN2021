@@ -3,8 +3,11 @@ var router = express.Router();
 const multer = require('multer')
 const os = require('os')
 const { index, viewCreate, createData, viewUpdate, updateData, deleteData, changeStatus } = require('./controller')
+const { isLoginAdmin } = require('../middleware/auth')
 
-/* GET category page. */
+/* Router Vouchers Page */
+router.use(isLoginAdmin)
+
 router.get('/', index)
 router.get('/create', viewCreate)
 router.post('/create', multer({ dest: os.tmpdir()}).single('thumbnail'), createData)
