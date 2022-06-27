@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nominal</h1>
+            <h1>Bank</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -44,39 +44,69 @@
                       <select class="form-control select2" name="bankName" required style="width: 100%;">
                         <option>Choose Bank</option>
                         <option 
-                          value="Bank Rakyat Indonesia"
-                          <% if (data.bankName == 'Bank Rakyat Indonesia') { %> selected <% } %>
-                        >Bank Rakyat Indonesia
+                          value="BRI"
+                          <% if (data.bankName == 'BRI') { %> selected <% } %>
+                        >BRI
                         </option>
                         <option 
-                          value="Bank Nasional Indonesia"
-                          <% if (data.bankName == 'Bank Nasional Indonesia') { %> selected <% } %>
+                          value="BNI"
+                          <% if (data.bankName == 'BNI') { %> selected <% } %>
                         >
-                          Bank Nasional Indonesia
+                          BNI
                         </option>
                         <option 
-                          value="Bank Syariah Indonesia"
-                          <% if (data.bankName == 'Bank Syariah Indonesia') { %> selected <% } %>  
+                          value="BSI"
+                          <% if (data.bankName == 'BSI') { %> selected <% } %>  
                         >
-                          Bank Syariah Indonesia
+                          BSI
                         </option>
                         <option 
-                          value="Bank Central Asia"
-                          <% if (data.bankName == 'Bank Central Asia') { %> selected <% } %>
+                          value="BCA"
+                          <% if (data.bankName == 'BCA') { %> selected <% } %>
                         >
-                          Bank Central Asia
+                          BCA
                         </option>
                         <option 
-                          value="Bank Mandiri"
-                          <% if (data.bankName == 'Bank Mandiri') { %> selected <% } %>
+                          value="Mandiri"
+                          <% if (data.bankName == 'Mandiri') { %> selected <% } %>
                         >
-                          Bank Mandiri
+                          Mandiri
                         </option>
                         <option 
-                          value="Bank Jago"
-                          <% if (data.bankName == 'Bank Jago') { %> selected <% } %>
+                          value="Jago"
+                          <% if (data.bankName == 'Jago') { %> selected <% } %>
                         >
-                          Bank Jago
+                          Jago
+                        </option>
+                        <option 
+                          value="Credit card"
+                          <% if (data.bankName == 'Credit card') { %> selected <% } %>
+                        >
+                          Credit Card
+                        </option>
+                        <option 
+                          value="VISA"
+                          <% if (data.bankName == 'VISA') { %> selected <% } %>
+                        >
+                          VISA
+                        </option>
+                          <option 
+                          value="DANA"
+                          <% if (data.bankName == 'DANA') { %> selected <% } %>
+                        >
+                          DANA
+                        </option>
+                        <option 
+                          value="GOPAY"
+                          <% if (data.bankName == 'GOPAY') { %> selected <% } %>
+                        >
+                          GOPAY
+                        </option>
+                        <option 
+                          value="OVO"
+                          <% if (data.bankName == 'OVO') { %> selected <% } %>
+                        >
+                          OVO
                         </option>
                     </select>
                   </div>
