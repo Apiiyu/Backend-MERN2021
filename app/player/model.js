@@ -1,4 +1,7 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
+const HASH_ROUND = bcrypt.genSaltSync(10)
+
 let schemaPlayer = mongoose.Schema({
   email: {
     type: String,
@@ -49,6 +52,20 @@ let schemaPlayer = mongoose.Schema({
   },
 }, {
   timestamps: true
+})
+
+schemaPlayer.path('email').validate(async (value) => {
+  try {
+    const count = await mongoose.model('Player').countDocuments({email: value})
+    return !count
+  } catch (error) {
+    throw error
+  }
+}, attrribute => `${attrribute.value} has already registered!`)
+
+schemaPlayer.pre('save', function (next) {
+  this.password = bcrypt.hashSync(this.password, HASH_ROUND)
+  next()
 })
 
 module.exports = mongoose.model('Player', schemaPlayer)

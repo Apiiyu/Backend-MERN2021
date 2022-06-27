@@ -52,19 +52,35 @@
           <% } %>
         </td>
         <td class="d-flex">
-          <form action="/transactions/status/<%= data[index]._id %>?status=Failed&_method=PUT" method="post">
-            <button class="btn btn-danger btn-sm mr-1" type="submit">
-              <i class="fas fa-trash"></i>
-              Rejected
-            </button>
-          </form>
-
-          <form action="/transactions/status/<%= data[index]._id %>?status=Success&_method=PUT" method="post">
-            <button class="btn btn-info btn-sm" type="submit">
-              <i class="fas fa-check"></i>
-              Accepted
-            </button>
-          </form>
+          <% if(data[index].status === 'Failed') { %>
+            <form action="/transactions/status/<%= data[index]._id %>?status=Success&_method=PUT" method="post">
+              <button class="btn btn-info btn-sm" type="submit">
+                <i class="fas fa-check"></i>
+                Accepted
+              </button>
+            </form>
+            <% } else if(data[index].status  === 'Success') { %>
+              <form action="/transactions/status/<%= data[index]._id %>?status=Failed&_method=PUT" method="post">
+                <button class="btn btn-danger btn-sm mr-1" type="submit">
+                  <i class="fas fa-trash"></i>
+                  Rejected
+                </button>
+              </form>
+            <% } else { %>
+              <form action="/transactions/status/<%= data[index]._id %>?status=Failed&_method=PUT" method="post">
+                <button class="btn btn-danger btn-sm mr-1" type="submit">
+                  <i class="fas fa-trash"></i>
+                  Rejected
+                </button>
+              </form>
+    
+              <form action="/transactions/status/<%= data[index]._id %>?status=Success&_method=PUT" method="post">
+                <button class="btn btn-info btn-sm" type="submit">
+                  <i class="fas fa-check"></i>
+                  Accepted
+                </button>
+              </form>
+            <% } %> 
         </td>
       </tr>
     <% } %>

@@ -4,7 +4,6 @@ const Nominal = require('../nominal/model')
 const path = require('path')
 const fs = require('fs')
 const config = require('../../config/env')
-const { response } = require('express')
 
 module.exports = {
   /**
