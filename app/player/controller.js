@@ -32,6 +32,7 @@ module.exports = {
       .populate('category')
       .populate('nominals')
       .populate('user')
+      .populate('payments')
 
       if(!VoucherItems) {
         return response.status(404).json({

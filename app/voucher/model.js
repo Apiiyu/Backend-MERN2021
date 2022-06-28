@@ -28,6 +28,10 @@ let schemaVoucher = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Users'
   },
+  payments: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Payment'
+  }
 },{
   timestamps: true
 })
