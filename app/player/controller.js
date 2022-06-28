@@ -12,7 +12,8 @@ const config = require('../../config/env')
 module.exports = {
   test: async (request, response) => {
     try {
-      const data = await Voucher.find()
+      const data = await Payment.find()
+      
       response.status(200).json({
         data
       })
@@ -45,7 +46,13 @@ module.exports = {
       .populate('category')
       .populate('nominals')
       .populate('user')
-      .populate('payments')
+      .populate({
+        path: 'payments', 
+        populate: {
+          path: 'banks',
+          model: 'Bank'
+        }
+      })
 
       if(!VoucherItems) {
         return response.status(404).json({
