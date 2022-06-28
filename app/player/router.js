@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
-const { landingPage, detailPage, category, checkOut, historyTransaction, detailHistory, dashboardOverview, profile, updateProfile } = require('./controller')
+const { test, landingPage, detailPage, category, checkOut, historyTransaction, detailHistory, dashboardOverview, profile, updateProfile } = require('./controller')
 const { isLoginPlayer } = require('../middleware/auth')
 const multer = require('multer')
 const os = require('os')
 
 /* Router Payment of Method Page */
 
+router.get('/test', test)
 router.get('/landingpage', landingPage)
 router.get('/:id/detail', detailPage)
 router.get('/category', category)
