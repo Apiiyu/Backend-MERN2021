@@ -10,20 +10,6 @@ const fs = require('fs')
 const config = require('../../config/env')
 
 module.exports = {
-  test: async (request, response) => {
-    try {
-      const data = await Payment.find()
-      
-      response.status(200).json({
-        data
-      })
-
-    } catch(error) {
-      response.status(500).json({
-        message: 'Internal server error'
-      })
-    }
-  },
   landingPage: async (request, response) => {
     try {
       const VoucherItems = await Voucher.find().select('_id name status category thumbnail').populate('category')
@@ -270,8 +256,10 @@ module.exports = {
 
       response.status(200).json({
         message: 'Successfully get data dashboard overview!',
-        data: history,
-        counts: count
+        data: {
+          history,
+          counts: count
+        } 
       })
     } catch(error) {
       response.status(500).json({

@@ -22,7 +22,7 @@ let schemaPlayer = mongoose.Schema({
   phoneNumber: {
     type: String,
     require: [true, 'Phone Number is required!'],
-    minLength: [10, 'Phone Number is 3 - 225 Character'],
+    minLength: [10, 'Phone Number is 10 - 225 Character'],
     maxLength: [13, 'Phone Number is 3 - 225 Character'],
   },
   password: {
