@@ -40,7 +40,7 @@ let schemaTransaction = mongoose.Schema({
       require: [true, 'Bank Name is required!']
     },
     accountNumber: {
-      type: Number,
+      type: String,
       require: [true, 'Account Number is required!']
     },
   },
