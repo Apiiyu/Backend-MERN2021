@@ -15,6 +15,6 @@ router.get('/history', isLoginPlayer, historyTransaction)
 router.get('/history/:id/detail', isLoginPlayer, detailHistory)
 router.get('/dashboard', isLoginPlayer, dashboardOverview)
 router.get('/profile', isLoginPlayer, profile)
-router.put('/profile', isLoginPlayer, multer({dest: os.tmpdir()}).single('avatar') ,updateProfile)
+router.put('/profile/:id/update', multer({ dest: os.tmpdir()}).single('avatar'), isLoginPlayer,  updateProfile)
 
 module.exports = router;

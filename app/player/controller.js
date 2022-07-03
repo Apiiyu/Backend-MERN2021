@@ -292,10 +292,12 @@ module.exports = {
     }
   },
 
-  updateProfile: async (request, response, next) => {
+  updateProfile: async (request, response) => {
     try {
       const { name = '', phoneNumber= '' } = request.body
       const payload = {}
+      const { id } = request.params
+      console.log(request.file, 'file')
 
       if(name.length) payload.name = name
       if(phoneNumber.length) payload.phoneNumber = phoneNumber
@@ -311,25 +313,24 @@ module.exports = {
 
         src.pipe(destination)
         src.on('end', async ()=> {
-            let player = await Player.findById(request.player._id)
+            let player = await Player.findById(id)
             let currentImage = `${config.rootPath}/public/uploads/players/${player.avatar}`
             if (fs.existsSync(currentImage)) {
               fs.unlinkSync(currentImage)
             }
 
             player = await Player.findOneAndUpdate({
-              _id: request.player._id
+              _id: id
             }, {
               ...payload,
               avatar: filename
             }, { new: true, runValidators: true} )
 
-            console.log(player)
 
             response.status(201).json({
               message: 'Successfully update profile!',
               data: {
-                id: player.id,
+                id,
                 name: player.name,
                 phoneNumber: player.phoneNumber,
                 avatar: player.avatar
@@ -338,13 +339,13 @@ module.exports = {
         })
       } else {
         const data = await Player.findOneAndUpdate({
-          _id: request.player._id
+          _id: id
         }, payload, { new: true, runValidators: true})
-      
+        
         response.status(201).json({
           message: 'Successfully update profile!',
           data: {
-            id: data.id,
+            id,
             name: data.name,
             phoneNumber: data.phoneNumber,
             avatar: data.avatar
