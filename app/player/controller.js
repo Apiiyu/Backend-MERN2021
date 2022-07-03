@@ -112,8 +112,7 @@ module.exports = {
       }
 
       let tax = (10/100) * NominalData._doc.price
-      let value = NominalData._doc.price - tax
-      console.log(value)
+      let value = NominalData._doc.price + tax
 
       const payload = {
         historyVoucherTopUp: {
@@ -125,10 +124,10 @@ module.exports = {
           price: NominalData._doc.price
         },
         historyPayment: {
-          name: PaymentData._doc.name,
+          name: BankData._doc.name,
           type: PaymentData._doc.type,
-          bankName: PaymentData._doc.bankName,
-          accountNumber: PaymentData._doc.accountNumber
+          bankName: BankData._doc.bankName,
+          accountNumber: BankData._doc.accountNumber
         },
         name,
         accountUser,
