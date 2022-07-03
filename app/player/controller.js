@@ -190,8 +190,10 @@ module.exports = {
 
       response.status(200).json({
         message: 'Successfully get history transaction',
-        data: history,
-        total: total.length ? total[0].value: 0
+        data: {
+          history,
+          total: total.length ? total[0].value: 0
+        }
       })
     } catch (error) {
       response.status(500).json({
