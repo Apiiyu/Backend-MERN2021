@@ -85,8 +85,8 @@ module.exports = {
           const token = jwt.sign({
             data: {
               id: data.id,
-              username: data.username,
-              email: data.name,
+              name: data.name,
+              email: data.email,
               phoneNumber: data.phoneNumber,
               avatar: data.avatar
             }
