@@ -1,11 +1,11 @@
-const dotenv = require('dotenv')
-const path = require('path')
+const dotenv = require("dotenv");
+const path = require("path");
 
-dotenv.config()
+dotenv.config();
 
 module.exports = {
-  rootPath: path.resolve(__dirname, '../../'),
+  rootPath: path.resolve(__dirname, "../../"),
   ServiceName: process.env.SERVICE_NAME,
-  UrlDb : process.env.MONGODB_URL, 
-  jwtKey: process.env.SECRET
-}
+  UrlDb: process.env.MONGODB_URL,
+  jwtKey: process.env.SECRET,
+};
